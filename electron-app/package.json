@@ -1,8 +1,8 @@
 {
   "name": "pzpw-desktop",
   "productName": "PZPW Desktop",
+  "description": "Electron desktop app to manage PZPW projects.",
   "version": "1.0.0",
-  "description": "",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
