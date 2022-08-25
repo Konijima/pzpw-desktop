@@ -1,4 +1,4 @@
-name: Lint & Test
+name: Test
 on:
   push:
   pull_request:
@@ -16,5 +16,4 @@ jobs:
           cache: npm
           cache-dependency-path: '**/package-lock.json'
       - run: npm install
-      - run: npm run lint
       - run: npm run test
