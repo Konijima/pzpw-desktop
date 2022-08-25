@@ -1,0 +1,19 @@
+{
+  "name": "pzpw-desktop",
+  "productName": "PZPW Desktop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "prepackager": "cd ../angular-app && npm run build",
+    "packager": "electron-packager . --out=../builds"
+  },
+  "private": true,
+  "author": "Konijima",
+  "license": "Apache License Version 2.0",
+  "devDependencies": {
+    "electron": "latest",
+    "electron-packager": "latest"
+  }
+}
