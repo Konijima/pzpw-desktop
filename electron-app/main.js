@@ -10,6 +10,8 @@ function onClosed() {
 }
 
 function createWindow () {
+  if (mainWindow && !mainWindow.isFocused()) return;
+
   if (mainWindow) {
     mainWindow.off("closed", onClosed);
     mainWindow.close();
