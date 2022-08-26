@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { IpcRenderer } from '../typings/IpcRenderer';
 import { IProject } from '../typings/IProject';
 
@@ -13,6 +13,7 @@ export class ProjectManagerService {
   public readonly Projects: BehaviorSubject<IProject[]> = new BehaviorSubject<IProject[]>([]);
   public readonly Initializing: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly Initialized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly OpenedProject: Subject<IProject> = new Subject<IProject>();
   
   constructor() {
     this.requestProjects()
@@ -54,6 +55,7 @@ export class ProjectManagerService {
           const projects = [...this.Projects.value];
           projects.push(project);
           this.Projects.next(projects);
+          this.OpenedProject.next(project);
         }
       });
   }
