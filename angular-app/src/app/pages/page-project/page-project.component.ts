@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectManagerService } from 'src/app/services/project-manager.service';
 import { IProject } from 'src/app/typings/IProject';
@@ -8,7 +8,7 @@ import { IProject } from 'src/app/typings/IProject';
   templateUrl: './page-project.component.html',
   styleUrls: ['./page-project.component.scss']
 })
-export class PageProjectComponent implements OnInit {
+export class PageProjectComponent {
 
   public project: IProject | undefined;
 
@@ -17,14 +17,16 @@ export class PageProjectComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private ngZone: NgZone
-  ) { }
+  ) {
+    this.route.params.subscribe(_ => {
+      const filePath = this.route.snapshot.paramMap.get('filePath') || undefined;
 
-  ngOnInit(): void {
-    const filePath = this.route.snapshot.paramMap.get('filePath') || undefined;
-    this.project = this.projectManager.getProjectBy(p => p.filePath === filePath);
-    if (!this.project) {
-      this.ngZone.run(_ => this.router.navigate(['']));
-    }
+      this.project = this.projectManager.getProjectBy(p => p.filePath === filePath);
+      
+      if (!this.project) {
+        this.ngZone.run(_ => this.router.navigate(['']));
+      }
+    });
   }
 
 }

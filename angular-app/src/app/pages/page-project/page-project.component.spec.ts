@@ -22,31 +22,30 @@ describe('PageProjectComponent', () => {
     .compileComponents();
 
     service = TestBed.inject(ProjectManagerService);
-    route = TestBed.inject(ActivatedRoute);
+    service.Projects.next([ { filePath: 'test' } as any ]);
 
-    fixture = TestBed.createComponent(PageProjectComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    route = TestBed.inject(ActivatedRoute);
   });
 
   it('should create page', () => {
+    fixture = TestBed.createComponent(PageProjectComponent);
+    component = fixture.componentInstance;
+
     expect(component).toBeTruthy();
   });
 
-  it('should redirect on ngOnInit with invalid project', () => {
-    route.snapshot.params = { filePath: 'test' };
-
-    component.ngOnInit();
+  it('should have an invalid project', () => {
+    fixture = TestBed.createComponent(PageProjectComponent);
+    component = fixture.componentInstance;
 
     expect(component.project).toBeUndefined();
   });
 
-  it('should not redirect on ngOnInit with valid project', () => {
-    service.Projects.next([ { filePath: 'test' } as any ]);
-
+  it('should have a valid project', () => {
     route.snapshot.params = { filePath: 'test' };
 
-    component.ngOnInit();
+    fixture = TestBed.createComponent(PageProjectComponent);
+    component = fixture.componentInstance;
 
     expect(component.project).toBeTruthy();
   });
