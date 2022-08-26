@@ -1,5 +1,6 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ProjectManagerService } from 'src/app/services/project-manager.service';
 import { IProject } from 'src/app/typings/IProject';
 
@@ -8,9 +9,11 @@ import { IProject } from 'src/app/typings/IProject';
   templateUrl: './page-project.component.html',
   styleUrls: ['./page-project.component.scss']
 })
-export class PageProjectComponent {
+export class PageProjectComponent implements OnDestroy {
 
   public project: IProject | undefined;
+
+  private routeChangeSub: Subscription;
 
   constructor(
     private projectManager: ProjectManagerService,
@@ -18,7 +21,7 @@ export class PageProjectComponent {
     private router: Router,
     private ngZone: NgZone
   ) {
-    this.route.params.subscribe(_ => {
+    this.routeChangeSub = this.route.params.subscribe(_ => {
       const filePath = this.route.snapshot.paramMap.get('filePath') || undefined;
 
       this.project = this.projectManager.getProjectBy(p => p.filePath === filePath);
@@ -27,6 +30,10 @@ export class PageProjectComponent {
         this.ngZone.run(_ => this.router.navigate(['']));
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.routeChangeSub?.unsubscribe();
   }
 
 }
