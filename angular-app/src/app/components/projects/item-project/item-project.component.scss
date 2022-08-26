@@ -1,0 +1,35 @@
+:host {
+    .item-project {
+        width: 100%;
+        padding: 15px;
+        display: block;
+        margin-top: 10px;
+        border-radius: 0;
+        background-color: rgb(37, 37, 37);
+        transition: 0.3s ease-out;
+        cursor: pointer;
+
+        h1 {
+            margin: 0;
+            color: #fff;
+            font-size: 18px;
+            line-height: 100%;
+            display: block;
+        }
+
+        h2 {
+            margin: 0;
+            color: rgb(177, 177, 177);
+            font-size: 12px;
+            line-height: 100%;
+            display: block;
+        }
+    }
+
+    &.active,
+    &:hover {
+        .item-project {
+            background-color: #1a1e38;
+        }
+    }
+}
