@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProjectManagerService } from './services/project-manager.service';
+import { IProject } from './typings/IProject';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,20 @@ import { ProjectManagerService } from './services/project-manager.service';
 export class AppComponent {
 
   constructor(
-    public projectManager: ProjectManagerService
-  ) { }
+    private router: Router,
+    private projectManager: ProjectManagerService
+  ) {
+    this.projectManager.OpenedProject.subscribe((project: IProject) => {
+      this.router.navigate(['project', project.filePath]);
+    });
+  }
+
+  IsInitialized() {
+    return this.projectManager.Initialized.value;
+  }
+
+  GetProjects() {
+    return this.projectManager.Projects.value;
+  }
 
 }

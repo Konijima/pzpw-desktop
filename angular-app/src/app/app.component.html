@@ -1,11 +1,11 @@
 
-<app-loading-overlay [visible]="!projectManager.Initialized">
-    <h1>Loading...</h1>
+<app-loading-overlay [visible]="!IsInitialized()">
+    <h1>Initializing...</h1>
 </app-loading-overlay>
 
 <div class="app-container">
     <div class="side">
-        <app-list-projects [projects]="projectManager.Projects.value"></app-list-projects>
+        <app-list-projects [projects]="GetProjects()"></app-list-projects>
     </div>
     <div class="content">
         <router-outlet></router-outlet>
