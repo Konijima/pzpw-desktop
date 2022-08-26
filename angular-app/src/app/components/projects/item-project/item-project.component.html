@@ -1,4 +1,5 @@
-<div class="item-project">
+
+<div class="item-project" [routerLink]="['/project', project.filePath]" [routerLinkActive]="['active']">
     <h1>{{project.pzpwConfigJson.workshop.title}}</h1>
     <h2>{{project.filePath}}</h2>
 </div>

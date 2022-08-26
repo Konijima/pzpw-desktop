@@ -24,11 +24,9 @@
             line-height: 100%;
             display: block;
         }
-    }
 
-    &.active,
-    &:hover {
-        .item-project {
+        &.active,
+        &:hover {
             background-color: #1a1e38;
         }
     }
