@@ -1,5 +1,5 @@
 const { homedir } = require('os');
-const { ipcMain, dialog, BrowserWindow } = require('electron');
+const { ipcMain, dialog, BrowserWindow, shell } = require('electron');
 const { join, resolve, dirname } = require('path');
 const { readFile, writeFile, mkdir } = require('fs/promises');
 
@@ -85,4 +85,14 @@ ipcMain.handle('openProject', async () => {
             else dialog.showErrorBox('Error', 'Directory is not a PZPW Project!');
         }
     }
+});
+
+// openDirectory
+ipcMain.handle('openDirectory', (_, path) => {
+    shell.openPath(path);
+});
+
+// openWebPage
+ipcMain.handle('openWebPage', (_, url) => {
+    shell.openExternal(url);
 });
