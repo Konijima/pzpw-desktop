@@ -1,4 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+    box-sizing: border-box;
+}
+
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before {
+    -webkit-user-select: none;
+    user-select: none;
+}
+input, button, textarea, :focus {
+    outline: none;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+ 
+::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgb(39, 39, 39);
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: rgb(95, 95, 95);
+}
