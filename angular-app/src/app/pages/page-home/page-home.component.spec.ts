@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LoadingOverlayComponent } from 'src/app/components/ui/loading-overlay/loading-overlay.component';
 
 import { PageHomeComponent } from './page-home.component';
 
@@ -8,7 +9,10 @@ describe('PageHomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageHomeComponent ]
+      declarations: [
+        PageHomeComponent,
+        LoadingOverlayComponent
+      ]
     })
     .compileComponents();
 
