@@ -1,0 +1,12 @@
+<button class="top-button" 
+        mat-icon-button color="primary"
+        (click)="openProject()">
+    <mat-icon>folder_open</mat-icon>
+    Open PZPW Project
+</button>
+
+<div class="list">
+    <div class="list-item" *ngFor="let p of projects">
+        <app-item-project [project]="p" [routerLink]="['/project', p.filePath]"></app-item-project>
+    </div>
+</div>
