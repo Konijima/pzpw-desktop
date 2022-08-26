@@ -60,4 +60,18 @@ export class ProjectManagerService {
       });
   }
 
+  /**
+   * Open file browser to path
+   */
+  public openDirectory(path: string) {
+    ipcRenderer.invoke('openDirectory', path);
+  }
+
+  /**
+   * Open external web page to url
+   */
+  public openWebPage(url: string) {
+    ipcRenderer.invoke('openWebPage', url);
+  }
+
 }
