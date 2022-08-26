@@ -38,3 +38,9 @@ input, button, textarea, :focus {
     border-radius: 0;
     background-color: rgb(95, 95, 95);
 }
+
+a {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
