@@ -1,7 +1,6 @@
 {
   "root": true,
   "ignorePatterns": [
-    "projects/**/*"
   ],
   "overrides": [
     {
@@ -34,7 +33,16 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/quotes": [
+          "error",
+          "single",
+          {
+            "allowTemplateLiterals": true
+          }
+        ],
+        "semi": "off",
+        "@typescript-eslint/semi": ["error"]
       }
     },
     {
@@ -44,7 +52,9 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {}
+      "rules": {
+        
+      }
     }
   ]
 }
