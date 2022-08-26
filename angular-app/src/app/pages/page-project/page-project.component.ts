@@ -11,7 +11,7 @@ import { IProject } from 'src/app/typings/IProject';
 })
 export class PageProjectComponent implements OnDestroy {
 
-  public project: IProject | undefined;
+  private project: IProject | undefined;
 
   private routeChangeSub: Subscription;
 
@@ -36,4 +36,53 @@ export class PageProjectComponent implements OnDestroy {
     this.routeChangeSub?.unsubscribe();
   }
 
+  getTitle() {
+    return this.project?.pzpwConfigJson.workshop.title;
+  }
+
+  getWorkshopID() {
+    const id = this.project?.pzpwConfigJson.workshop.id;
+    return (id && id > 0) ? id : undefined;
+  }
+
+  getHomepage() {
+    return this.project?.packageJson.homepage;
+  }
+
+  getFilePath() {
+    return this.project?.filePath || '';
+  }
+
+  getDependencies() {
+    const deps = [];
+    for (let dep of Object.entries(this.project?.packageJson.dependencies)) {
+      deps.push(dep);
+    }
+    return deps;
+  }
+
+  printModNames() {
+    const mods = this.project?.pzpwConfigJson.mods;
+    if (mods) {
+      return Object.values(mods).map(p => p.name).join(', ');
+    }
+    else return '<no mod(s)>';
+  }
+
+  printAuthors() {
+    const authors = this.project?.pzpwConfigJson.workshop.author;
+    return (Array.isArray(authors)) ? authors.join(', ') : authors;
+  }
+
+  printKeywords() {
+    return (this.project?.packageJson.keywords) ? this.project?.packageJson.keywords.join(', ') : undefined;
+  }
+
+  openDirectory(path: string) {
+    this.projectManager.openDirectory(path);
+  }
+
+  openWebPage(url: string) {
+    this.projectManager.openWebPage(url);
+  }
 }

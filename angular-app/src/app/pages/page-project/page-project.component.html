@@ -1,1 +1,38 @@
-<h1>{{project?.pzpwConfigJson?.workshop?.title}}</h1>
+<h1>{{getTitle()}}</h1>
+
+<p class="workshop-id" *ngIf="getWorkshopID()">
+    <b>Workshop ID:</b> <br>
+    {{getWorkshopID()}}
+</p>
+
+<p class="mod-authors">
+    <b>Author(s):</b> <br>
+    {{printAuthors()}}
+</p>
+
+<p class="mod-names">
+    <b>Mod(s):</b> <br>
+    {{printModNames()}}
+</p>
+
+<p class="keywords" *ngIf="printKeywords()">
+    <b>Keywords:</b> <br>
+    {{printKeywords()}}
+</p>
+
+<p class="local-directory" *ngIf="getFilePath()">
+    <b>Directory: </b> <br>
+    <a (click)="openDirectory(getFilePath())">{{getFilePath()}}</a>
+</p>
+
+<p class="homepage" *ngIf="getHomepage()">
+    <b>Homepage: </b> <br>
+    <a (click)="openWebPage(getHomepage())">{{getHomepage()}}</a>
+</p>
+
+<div class="dependencies">
+    <b>Dependencies:</b> <br>
+    <div *ngFor="let dep of getDependencies()">
+        <p>{{dep[0]}} = {{dep[1]}}</p>
+    </div>
+</div>

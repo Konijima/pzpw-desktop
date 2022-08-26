@@ -38,6 +38,7 @@ describe('PageProjectComponent', () => {
     fixture = TestBed.createComponent(PageProjectComponent);
     component = fixture.componentInstance;
 
+    /** @ts-ignore */
     expect(component.project).toBeUndefined();
   });
 
@@ -47,6 +48,7 @@ describe('PageProjectComponent', () => {
     fixture = TestBed.createComponent(PageProjectComponent);
     component = fixture.componentInstance;
 
+    /** @ts-ignore */
     expect(component.project).toBeTruthy();
   });
 });
