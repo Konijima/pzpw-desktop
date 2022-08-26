@@ -1,12 +1,19 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, globalShortcut } = require('electron');
-const path = require('path');
+const { join } = require('path');
 const url = require('url');
+
+// Initialize ipcMain
+require('./ipc');
 
 let mainWindow;
 
 function onClosed() {
   mainWindow = null;
+}
+
+function toggleDevTools() {
+  mainWindow.webContents.toggleDevTools();
 }
 
 function createWindow () {
@@ -23,28 +30,29 @@ function createWindow () {
     minWidth: 800,
     minHeight: 600,
     maximizable: true,
-    center: true,
+    webPreferences: {
+      nodeIntegration: false,
+      preload: join(__dirname, "preload.js")
+    }
   });
 
   mainWindow.setMenu(null);
 
   mainWindow.loadURL(
     url.format({
-      pathname: path.join(__dirname, `app/index.html`),
+      pathname: join(__dirname, `app/index.html`),
       protocol: "file:",
       slashes: true
     })
   );
 
+  globalShortcut.register('F6', toggleDevTools);
   globalShortcut.register('F5', createWindow);
   globalShortcut.register('CommandOrControl+R', createWindow);
   mainWindow.once('beforeunload', () => {
+    globalShortcut.unregister('F6', toggleDevTools);
     globalShortcut.unregister('F5', createWindow);
     globalShortcut.unregister('CommandOrControl+R', createWindow);
-  });
-
-  mainWindow.webContents.openDevTools({
-    mode: 'detach'
   });
 
   mainWindow.on("closed", onClosed);
